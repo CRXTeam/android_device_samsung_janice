@@ -21,7 +21,7 @@
     "target_path": "device/samsung/u8500-common"
   },
   { "remote": "github",
-    "revision": "cm-11.0",
+    "revision": "master",
     "repository": "TeamCanjica/android_packages_apps_DeviceSettings",
     "target_path": "packages/apps/DeviceSettings"
   },
