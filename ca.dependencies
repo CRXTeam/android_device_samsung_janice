@@ -6,8 +6,8 @@
     "target_path": "vendor/samsung/u8500-common"
   },
   { "remote": "github",
-    "revision": "3.0.31",
-    "repository": "Chirag-Galani/Samsung_STE_Kernel",
+    "revision": "3.0.101",
+    "repository": "J-Team/platform_kernel_samsung_u8500",
     "target_path": "kernel/samsung/u8500"
   },
   { "remote": "github",
