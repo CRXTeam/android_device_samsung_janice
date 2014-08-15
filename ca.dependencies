@@ -8,7 +8,7 @@
   { "remote": "github",
     "revision": "3.0.101",
     "repository": "CrystalAOKP/Samsung_STE_Kernel",
-    "target_path": "kernel/samsung/u8500"
+    "target_path": "kernel/samsung"
   },
   { "remote": "github",
     "revision": "cm-11.0",
