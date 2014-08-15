@@ -6,7 +6,7 @@
     "target_path": "vendor/samsung/u8500-common"
   },
   { "remote": "github",
-    "revision": "3.0.101",
+    "revision": "3.0.31",
     "repository": "CrystalAOKP/Samsung_STE_Kernel",
     "target_path": "kernel/samsung/u8500"
   },
