@@ -32,8 +32,8 @@
   },
   { "remote": "aosp",
     "revision": "master",
-    "repository": "platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6",
-    "target_path": "prebuilt/linux-x86/toolchain/arm-eabi-4.6"
+    "repository": "platform/prebuilt",
+    "target_path": "prebuilt"
   },
   { "remote": "github",
     "revision": "cm-10.2",
