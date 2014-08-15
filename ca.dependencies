@@ -30,6 +30,11 @@
     "repository": "CyanogenMod/android_packages_apps_SamsungServiceMode",
     "target_path": "packages/apps/SamsungServiceMode"
   },
+  { "remote": "aosp",
+    "revision": "master",
+    "repository": "platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.6",
+    "target_path": "prebuilt/linux-x86/toolchain/arm-eabi-4.6"
+  },
   { "remote": "github",
     "revision": "cm-10.2",
     "repository": "CyanogenMod/android_system_bluetooth",
