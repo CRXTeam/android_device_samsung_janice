@@ -7,7 +7,7 @@
   },
   { "remote": "github",
     "revision": "3.0.31",
-    "repository": "CrystalAOKP/Samsung_STE_Kernel",
+    "repository": "J-Team/platform_kernel_samsung_u8500",
     "target_path": "kernel/samsung/u8500"
   },
   { "remote": "github",
@@ -29,11 +29,6 @@
     "revision": "cm-11.0",
     "repository": "CyanogenMod/android_packages_apps_SamsungServiceMode",
     "target_path": "packages/apps/SamsungServiceMode"
-  },
-  { "remote": "aosp",
-    "revision": "master",
-    "repository": "platform/prebuilt",
-    "target_path": "prebuilt"
   },
   { "remote": "github",
     "revision": "cm-10.2",
