@@ -21,3 +21,21 @@ BOARD_HARDWARE_CLASS := device/samsung/janice/cmhw
 
 # Disable legacy sensors using because janice has gyro
 BOARD_USE_LEGACY_SENSORS_FUSION := false
+
+## Webkit
+PRODUCT_PACKAGES += \
+    libwebcore	
+
+# (classic webview provider)
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.webview.provider=classic
+
+ENABLE_WEBGL := true
+PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
+TARGET_ARCH_LOWMEM := true
+JS_ENGINE	:= v8
+HTTP	:= chrome
+WITH_JIT	:= true
+ENABLE_JSC_JIT	:= true
+TARGET_WEBKIT_USE_MORE_MEMORY	:= true
+TARGET_FORCE_CPU_UPLOAD	:= true
