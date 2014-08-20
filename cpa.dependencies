@@ -7,7 +7,7 @@
   },
   { "remote": "github",
     "revision": "3.0.101",
-    "repository": "CrystalAOKP/kernel_samsung_u8500",
+    "repository": "CRXTeam/kernel_samsung_u8500",
     "target_path": "kernel/samsung"
   },
   { "remote": "github",
