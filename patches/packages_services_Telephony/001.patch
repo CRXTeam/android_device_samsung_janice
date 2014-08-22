@@ -1,13 +1,47 @@
+commit e493cd583069652483ad63e7c86234dedfc9d6f7
+Author: h3llrais3r <pooh_beer_1@hotmail.com>
+Date:   Wed Mar 19 21:53:08 2014 +0100
+
+    Ported my low-incall volume fix from CM-10.2 to CM-11.0
+
+diff --git a/src/com/android/phone/AudioRouter.java b/src/com/android/phone/AudioRouter.java
+index 3c8e9d3..de13889 100644
+--- a/src/com/android/phone/AudioRouter.java
++++ b/src/com/android/phone/AudioRouter.java
+@@ -179,7 +179,12 @@ import java.util.List;
+ 
+     public void onMuteChange(boolean muted) {
+         logD("onMuteChange: " + muted);
++
+         notifyListeners();
++
++        // Fix for low in-call volume bug
++        // Reset the audio volume stream after mute change
++        PhoneUtils.resetAudioStreamVolume();
+     }
+ 
+     /**
+@@ -350,6 +355,10 @@ import java.util.List;
+         if (doNotify) {
+             notifyListeners();
+         }
++
++        // Fix for low in-call volume bug
++        // Reset the audio volume stream after switching audio mode
++        PhoneUtils.resetAudioStreamVolume();
+     }
+ 
+     /**
 diff --git a/src/com/android/phone/PhoneUtils.java b/src/com/android/phone/PhoneUtils.java
-index 5cff2ab..d0408db 100644
+index 2d44977..7df15e9 100644
 --- a/src/com/android/phone/PhoneUtils.java
 +++ b/src/com/android/phone/PhoneUtils.java
-@@ -2760,4 +2760,35 @@ private static SharedPreferences getPrefs(Context context) {
-             return PreferenceManager.getDefaultSharedPreferences(context);
+@@ -2027,6 +2027,38 @@ public class PhoneUtils {
+             }
          }
      }
-+    
-+     /**
++
++    /**
 +     * Reset the audio stream volume to fix the low in-call volume bug.
 +     *
 +     * Due to a bug in the OMX system, the audio stream volume is set to 0 after it was set to it's default volume.
@@ -19,10 +53,11 @@ index 5cff2ab..d0408db 100644
 +     */
 +    static void resetAudioStreamVolume() {
 +        PhoneGlobals app = PhoneGlobals.getInstance();
++        BluetoothManager btManager = app.getBluetoothManager();
 +        AudioManager audioManager = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
 +        // determine actual streamType
 +        int streamType = AudioManager.STREAM_VOICE_CALL;
-+        if (app.isBluetoothHeadsetAudioOn()) {
++        if (btManager.isBluetoothHeadsetAudioOn()) {
 +            streamType = AudioManager.STREAM_BLUETOOTH_SCO;
 +        }
 +        // determine volume and 1 level lower volume (lowest level can be 0)
@@ -37,36 +72,6 @@ index 5cff2ab..d0408db 100644
 +        audioManager.setStreamVolume(streamType, lowerVolume, 0);
 +        audioManager.setStreamVolume(streamType, volume, 0);
 +    }
- }
-diff --git a/src/com/android/phone/AudioRouter.java b/src/com/android/phone/AudioRouter.java
-index 3c8e9d3..1d136a2 100644
---- a/src/com/android/phone/AudioRouter.java
-+++ b/src/com/android/phone/AudioRouter.java
-@@ -350,6 +350,10 @@ private void updateAudioModeTo(int mode) {
-         if (doNotify) {
-             notifyListeners();
-         }
-+        
-+        // Fix for low in-call volume bug.
-+        // Reset the audio volume stream after switching audio mode
-+        PhoneUtils.resetAudioStreamVolume();
-     }
  
-     /**
-diff --git a/src/com/android/phone/PhoneUtils.java b/src/com/android/phone/PhoneUtils.java
-index d0408db..e47cb51 100644
---- a/src/com/android/phone/PhoneUtils.java
-+++ b/src/com/android/phone/PhoneUtils.java
-@@ -2775,8 +2775,11 @@ static void resetAudioStreamVolume() {
-         PhoneGlobals app = PhoneGlobals.getInstance();
-         AudioManager audioManager = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
-         // determine actual streamType
-+        
-+        final BluetoothManager btManager = app.getBluetoothManager();
-+        
-         int streamType = AudioManager.STREAM_VOICE_CALL;
--        if (app.isBluetoothHeadsetAudioOn()) {
-+        if (btManager.isBluetoothHeadsetAudioOn()) {
-             streamType = AudioManager.STREAM_BLUETOOTH_SCO;
-         }
-         // determine volume and 1 level lower volume (lowest level can be 0)
+     static boolean isInEmergencyCall(CallManager cm) {
+         for (Connection cn : cm.getActiveFgCall().getConnections()) {
