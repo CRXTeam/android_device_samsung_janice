@@ -8,6 +8,9 @@ rild.libargs=-d /dev/ttyS0
 ro.sf.lcd_density=200
 ro.lcd_min_brightness=30
 
+# Low Ram
+ro.config.low_ram=true
+
 # STE: Low power audio - enable ULP mode
 ste.nmf.autoidle=1
 
