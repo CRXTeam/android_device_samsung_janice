@@ -33,26 +33,35 @@ int vibrator_exists()
     return 1;
 }
 
-int sendit(int timeout_ms)
+static int sendit(int timeout_ms)
 {
     int nwr, ret, fd;
     char value[20];
-
-    if (timeout_ms == 0) {
-        /* Called from from vibrator_off(), checks if the device is vibrating,
-           if it's vibrating stop, if not, do nothing */
-        return (vibrator_exists() == 0) ? 0 : 1;
-    }
 
     fd = open(THE_DEVICE, O_RDWR);
     if(fd < 0)
         return errno;
 
-    /* timeout_ms < 0 means constant on, up to maximum allowed time */
-    nwr = sprintf(value, "%d\n", (timeout_ms < 0)?15000:timeout_ms);
+    nwr = sprintf(value, "%d\n", timeout_ms);
     ret = write(fd, value, nwr);
 
     close(fd);
 
     return (ret == nwr) ? 0 : -1;
 }
+
+
+int vibrator_on(int timeout_ms)
+{
+    /* constant on, up to maximum allowed time */
+	if(timeout_ms < 0)
+		return sendit(15000);
+	return sendit(timeout_ms);
+}
+
+int vibrator_off()
+{	
+	/* checks if the device is vibrating, if it's vibrating stop, if not, do nothing */
+	return (vibrator_exists() == 0) ? 0 : 1;
+}
+
