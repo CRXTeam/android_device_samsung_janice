@@ -9,11 +9,6 @@ cd system/vold
 git fetch http://review.cyanogenmod.org/CyanogenMod/android_system_vold refs/changes/15/56515/2
 git cherry-pick FETCH_HEAD
 cd ../..
-echo -e $CL_BLU"Cherrypicking JustArchi's ArchiDroid Optimizations V3"$CL_RST
-cd build
-git fetch https://github.com/TeamCanjica/android_build cm-11.0
-git cherry-pick dbe7e5b4fff354cd9a9ef2e6605fa7db7eef9727
-cd ..
 echo -e $CL_BLU"Cherrypicking ART compatibility fix with GCC 4.8"$CL_RST
 cd art
 git fetch https://github.com/JustArchi/android_art cm-11.0
