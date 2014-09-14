@@ -1,10 +1,16 @@
-commit 6ff33aeaae6c9306ef275354af895f491330525b
-Author: zodex <mimirower45@wp.pl>
-Date:   Sun Sep 14 19:36:30 2014 +0200
+From aa49072350ffb511dce9869a7c55436398587881 Mon Sep 17 00:00:00 2001
+From: zodex <mimirower45@wp.pl>
+Date: Sun, 14 Sep 2014 20:38:01 +0200
+Subject: [PATCH] Patch for u8500
 
-    Add u8500 patches
-    
-    Change-Id: Ic6494da84a296a6954026c26b4520f94385c0da7
+Change-Id: I5803ae63f0daa445cc3925fcd9c08bf4f20304b4
+---
+ include/utils/Flattenable.h | 22 ++++++++++++++++++++++
+ libcutils/android_reboot.c  |  2 +-
+ libutils/Android.mk         |  1 +
+ libutils/Flattenable.cpp    | 24 ++++++++++++++++++++++++
+ 4 files changed, 48 insertions(+), 1 deletion(-)
+ create mode 100644 libutils/Flattenable.cpp
 
 diff --git a/include/utils/Flattenable.h b/include/utils/Flattenable.h
 index 882a8b2..495b90d 100644
@@ -123,3 +129,6 @@ index 0000000..1f2ffaa
 +}
 +
 +}; // namespace android
+-- 
+1.8.3.2
+
