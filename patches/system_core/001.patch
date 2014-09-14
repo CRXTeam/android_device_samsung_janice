@@ -1,10 +1,10 @@
-commit 7410a911d6766a62088016c8948321c765726ed5
-Author: Robert Rozic <rooobertinhooo@gmail.com>
-Date:   Fri Jan 24 15:18:41 2014 +0100
+commit 6ff33aeaae6c9306ef275354af895f491330525b
+Author: zodex <mimirower45@wp.pl>
+Date:   Sun Sep 14 19:36:30 2014 +0200
 
-    STE OMX FIX
+    Add u8500 patches
     
-    Big thanks to @MaclawStudio for porting OMX fix to android 4.4
+    Change-Id: Ic6494da84a296a6954026c26b4520f94385c0da7
 
 diff --git a/include/utils/Flattenable.h b/include/utils/Flattenable.h
 index 882a8b2..495b90d 100644
@@ -68,6 +68,19 @@ index 882a8b2..495b90d 100644
  
  /*
   * LightFlattenable is a protocol allowing object to serialize themselves out
+diff --git a/libcutils/android_reboot.c b/libcutils/android_reboot.c
+index 326d402..ab836ec 100644
+--- a/libcutils/android_reboot.c
++++ b/libcutils/android_reboot.c
+@@ -93,7 +93,7 @@ static void remount_ro(void)
+ 
+ 
+     /* Now poll /proc/mounts till it's done */
+-    while (!remount_ro_done() && (cnt < 3600)) {
++    while (!remount_ro_done() && (cnt < 50)) {
+         usleep(100000);
+         cnt++;
+     }
 diff --git a/libutils/Android.mk b/libutils/Android.mk
 index 720443e..d48991d 100644
 --- a/libutils/Android.mk
@@ -82,7 +95,7 @@ index 720443e..d48991d 100644
  	LinearTransform.cpp \
 diff --git a/libutils/Flattenable.cpp b/libutils/Flattenable.cpp
 new file mode 100644
-index 0000000..39135e3
+index 0000000..1f2ffaa
 --- /dev/null
 +++ b/libutils/Flattenable.cpp
 @@ -0,0 +1,24 @@
@@ -110,4 +123,3 @@ index 0000000..39135e3
 +}
 +
 +}; // namespace android
-\ No newline at end of file
